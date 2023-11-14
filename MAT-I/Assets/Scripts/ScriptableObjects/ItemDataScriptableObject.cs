@@ -24,6 +24,7 @@ public class ItemData
 {
     public string itemName;
     public Sprite icon;
+    [TextArea]
     public string description;
     public float buyingprice;
     public float sellingprice;

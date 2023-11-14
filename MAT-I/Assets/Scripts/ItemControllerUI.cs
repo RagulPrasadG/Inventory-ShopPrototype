@@ -12,10 +12,15 @@ public class ItemControllerUI
         this.itemViewUI = Object.Instantiate(itemViewUI);
         this.itemViewUI.SetController(this);
     }
+    public void SetParent(RectTransform transform)
+    {
+        itemViewUI.transform.SetParent(transform, false);
+    }
 
     public void SetData(ItemData itemData)
     {
         this.itemData = itemData;
+        itemViewUI.Init(itemData);
     }
 
     public ItemData GetData() => itemData;

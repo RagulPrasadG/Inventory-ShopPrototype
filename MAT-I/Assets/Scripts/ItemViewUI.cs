@@ -16,10 +16,10 @@ public class ItemViewUI : MonoBehaviour
         this.itemControllerUI = itemController;
     }
 
-    public void Init()
+    public void Init(ItemData itemData)
     {
-        this.iconImage.sprite = itemControllerUI.GetData().icon;
-        this.quantityText.text = $"X{itemControllerUI.GetData().quantity}";
+        this.iconImage.sprite = itemData.icon;
+        this.quantityText.text = $"X{itemData.quantity}";
     }
 
 }

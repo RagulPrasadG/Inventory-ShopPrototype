@@ -12,13 +12,15 @@ public class InventoryService: MonoBehaviour
 
     public void Start()
     {
-        
+        AddItem();
     }
 
     public void AddItem()
     {
-        ItemData itemData = itemDataScriptableObject.GetItemData("BlueMedicine");
-        //ItemControllerUI itemControllerUI = new ItemControllerUI(inventorySlotPrefab,)
+        ItemData itemData = itemDataScriptableObject.GetItemData("Gladiator");
+        ItemControllerUI itemControllerUI = new ItemControllerUI(inventorySlotPrefab);
+        itemControllerUI.SetData(itemData);
+        itemControllerUI.SetParent(itemContainer);
     }
 
 }

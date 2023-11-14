@@ -15,7 +15,7 @@ MonoBehaviour:
   items:
   - itemName: Necklace
     icon: {fileID: 21300000, guid: 8e859c149e0cd814ea9acc8581953bd6, type: 3}
-    description: The jewel of the unknow soccerer believed to have special powers
+    description: The jewel of the unknown soccerer believed to have special powers
     buyingprice: 2000
     sellingprice: 1000
     weight: 10
@@ -42,7 +42,8 @@ MonoBehaviour:
     quantity: 1
   - itemName: Silver Bars
     icon: {fileID: 21300000, guid: e78313c7d47aeb845aee79d5bc8d26c5, type: 3}
-    description: The oceanic tonic which believes to heal any type of burns
+    description: Imported from the mighty cholas strong and expandable just like
+      their reign
     buyingprice: 300
     sellingprice: 300
     weight: 40
