@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemControllerUI
 {
@@ -15,6 +16,11 @@ public class ItemControllerUI
     public void SetParent(RectTransform transform)
     {
         itemViewUI.transform.SetParent(transform, false);
+    }
+   
+    public void OnItemSelected(UnityAction<ItemData> onItemSelect)
+    {
+        itemViewUI.itemButton.onClick.AddListener(delegate { onItemSelect(this.itemData); });
     }
 
     public void SetData(ItemData itemData)
