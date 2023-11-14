@@ -12,6 +12,11 @@ public class ItemDataScriptableObject : ScriptableObject
         return items.Find(itemdata => itemdata.itemName == name);
     }
 
+    public ItemData GetRandomItemData()
+    {
+        return null;
+    }
+
 }
 
 [System.Serializable]
