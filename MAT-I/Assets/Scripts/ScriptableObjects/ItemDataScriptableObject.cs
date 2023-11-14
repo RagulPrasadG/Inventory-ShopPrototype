@@ -7,16 +7,23 @@ public class ItemDataScriptableObject : ScriptableObject
 {
     public List<ItemData> items;
 
+    public ItemData GetItemData(string name)
+    {
+        return items.Find(itemdata => itemdata.itemName == name);
+    }
+
 }
 
 [System.Serializable]
 public class ItemData
 {
+    public string itemName;
     public Sprite icon;
     public string description;
     public float buyingprice;
     public float sellingprice;
     public float weight;
+    public ItemType itemType;
     public Rarity rarity;
     public float quantity;
 }
