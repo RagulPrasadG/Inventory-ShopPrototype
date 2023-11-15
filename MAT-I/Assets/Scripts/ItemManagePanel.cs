@@ -22,34 +22,41 @@ public class ItemManagePanel : MonoBehaviour
     [SerializeField] Image itemIcon;
 
     private EventService eventService;
-
-    private void OnEnable()
-    {
-        this.eventService.OnSellFromInfoPanel.AddListener(OnManageSell);
-        this.eventService.OnBuyFromInfoPanel.AddListener(OnManageBuy);
-    }
+    private ItemData itemData;
+    private bool isSelling;
 
     private void OnDisable()
     {
         this.eventService.OnSellFromInfoPanel.RemoveListener(OnManageSell);
         this.eventService.OnBuyFromInfoPanel.RemoveListener(OnManageBuy);
+        this.increaseAmountbutton.onClick.RemoveListener(OnItemQuantityIncreased);
+        this.decreaseAmountbutton.onClick.RemoveListener(OnItemQuantityDecreased);
     }
 
     private void OnManageBuy(ItemData itemData)
     {
+        this.itemData = itemData;
+        isSelling = false;
         ToggleButtons(false);
         buyButton.gameObject.SetActive(true);
     }
 
     private void OnManageSell(ItemData itemData)
     {
+        this.itemData = itemData;
+        isSelling = true;
         ToggleButtons(false);
         sellButton.gameObject.SetActive(true);
     }
 
     public void SetItemInfo(ItemData itemData)
     {
-        this.itemCostText.text = $"{itemData.sellingprice}";
+        this.itemData = itemData;
+        if(isSelling)
+           this.itemCostText.text = $"{itemData.sellingprice}";
+        else
+            this.itemCostText.text = $"{itemData.buyingprice}";
+
         this.itemNameText.text = itemData.itemName;
         this.itemAmountText.text = $"X{itemData.quantity}";
         this.itemWeightText.text = $"{itemData.weight}kg";
@@ -59,6 +66,39 @@ public class ItemManagePanel : MonoBehaviour
     public void Init(EventService eventService)
     {
         this.eventService = eventService;
+        this.eventService.OnSellFromInfoPanel.AddListener(OnManageSell);
+        this.eventService.OnBuyFromInfoPanel.AddListener(OnManageBuy);
+        this.increaseAmountbutton.onClick.AddListener(OnItemQuantityIncreased);
+        this.decreaseAmountbutton.onClick.AddListener(OnItemQuantityDecreased);
+    }
+
+    public void OnItemQuantityIncreased()
+    {
+        this.itemData.quantity++;
+        this.itemData.weight += this.itemData.weight;
+
+        if (isSelling)
+            this.itemData.sellingprice += this.itemData.sellingprice;
+        else
+            this.itemData.buyingprice += this.itemData.buyingprice;
+
+        SetItemInfo(this.itemData);
+    }
+
+    public void OnItemQuantityDecreased()
+    {
+        if (this.itemData.quantity == 1)
+            return;
+
+        this.itemData.quantity--;
+        this.itemData.weight -= this.itemData.weight;
+
+        if (isSelling)
+            this.itemData.sellingprice -= this.itemData.sellingprice;
+        else
+            this.itemData.buyingprice -= this.itemData.buyingprice;
+
+        SetItemInfo(this.itemData);
     }
 
     public void ToggleButtons(bool toggle)

@@ -42,6 +42,11 @@ public enum ItemType
     Treasure
 }
 
+public enum ItemStatus
+{
+    Buying,Selling
+}
+
 public enum Rarity
 {
    VeryCommon,
