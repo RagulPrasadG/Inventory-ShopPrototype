@@ -28,10 +28,10 @@ public struct ItemData
     public string description;
     public float buyingprice;
     public float sellingprice;
-    public float weight;
+    public int weight;
     public ItemType itemType;
     public Rarity rarity;
-    public float quantity;
+    public int quantity;
 }
 
 public enum ItemType

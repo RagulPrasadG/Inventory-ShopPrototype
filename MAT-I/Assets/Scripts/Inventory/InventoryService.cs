@@ -57,6 +57,19 @@ public class InventoryService: MonoBehaviour
         eventService.OnBuyFromInfoPanel.AddListener(ShowItemManagePanel);
         eventService.OnSellFromManagePanel.AddListener(ShowConfirmationPanel);
         eventService.OnBuyFromManagePanel.AddListener(ShowConfirmationPanel);
+        eventService.OnSellItem.AddListener(SellItem);
+    }
+
+    public void SellItem(ItemData sellingItemdata)
+    {
+        ItemData selecteditemData = selectedItem.GetData();
+        if (selecteditemData.quantity >= sellingItemdata.quantity)
+            selecteditemData.quantity -= sellingItemdata.quantity;
+        else
+            inventoryItems.Remove(selectedItem);
+
+        selectedItem.SetData(selecteditemData);
+        
     }
 
     public void ShowItemManagePanel(ItemData itemData)
@@ -79,6 +92,7 @@ public class InventoryService: MonoBehaviour
 
     public void ShowConfirmationPanel(ItemData itemData)
     {
+        confirmationPanel.SetItemData(itemData);
         confirmationPanel.SetSellMessageText(itemData);
         confirmationPanel.gameObject.SetActive(true);
     }
