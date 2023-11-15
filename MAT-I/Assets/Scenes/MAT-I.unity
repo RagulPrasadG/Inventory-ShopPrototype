@@ -1894,13 +1894,14 @@ GameObject:
   - component: {fileID: 381106429}
   - component: {fileID: 381106431}
   - component: {fileID: 381106430}
+  - component: {fileID: 381106432}
   m_Layer: 5
   m_Name: ConfirmationPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &381106429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1962,6 +1963,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381106428}
   m_CullTransparentMesh: 1
+--- !u!114 &381106432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381106428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b254918216e65e4eafd7d0c418fe4ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText: {fileID: 1216343704}
+  yesButton: {fileID: 2051815513}
+  noButton: {fileID: 2081775922}
 --- !u!1 &420436907
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,6 +3853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfoPanel: {fileID: 264220778}
   itemManagePanel: {fileID: 89000563}
+  confirmationPanel: {fileID: 381106432}
   itemContainer: {fileID: 420436908}
   inventorySlotPrefab: {fileID: 5907089903566875697, guid: 3ac9231c8614d80429298b49f3f1f5ba, type: 3}
   itemDataScriptableObject: {fileID: 11400000, guid: af078c3277a013142a80888af0394d3a, type: 2}

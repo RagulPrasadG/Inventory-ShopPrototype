@@ -12,7 +12,7 @@ public class ItemDataScriptableObject : ScriptableObject
         return items.Find(itemdata => itemdata.itemName == name);
     }
 
-    public ItemData GetRandomItemData()
+    public ItemData? GetRandomItemData()
     {
         return null;
     }
@@ -20,7 +20,7 @@ public class ItemDataScriptableObject : ScriptableObject
 }
 
 [System.Serializable]
-public class ItemData
+public struct ItemData
 {
     public string itemName;
     public Sprite icon;

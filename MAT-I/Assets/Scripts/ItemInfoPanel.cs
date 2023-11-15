@@ -22,7 +22,6 @@ public class ItemInfoPanel : MonoBehaviour
     private void OnEnable()
     {
         sellButton.onClick.AddListener(OnSellButtonClicked);
-
     }
 
     private void OnDisable()

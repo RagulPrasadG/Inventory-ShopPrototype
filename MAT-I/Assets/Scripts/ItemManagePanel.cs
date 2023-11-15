@@ -25,14 +25,6 @@ public class ItemManagePanel : MonoBehaviour
     private ItemData itemData;
     private bool isSelling;
 
-    private void OnDisable()
-    {
-        this.eventService.OnSellFromInfoPanel.RemoveListener(OnManageSell);
-        this.eventService.OnBuyFromInfoPanel.RemoveListener(OnManageBuy);
-        this.increaseAmountbutton.onClick.RemoveListener(OnItemQuantityIncreased);
-        this.decreaseAmountbutton.onClick.RemoveListener(OnItemQuantityDecreased);
-    }
-
     private void OnManageBuy(ItemData itemData)
     {
         this.itemData = itemData;
@@ -49,7 +41,7 @@ public class ItemManagePanel : MonoBehaviour
         sellButton.gameObject.SetActive(true);
     }
 
-    public void SetItemInfo(ItemData itemData)
+    public void SetItemInfoUI(ItemData itemData)
     {
         this.itemData = itemData;
         if(isSelling)
@@ -70,6 +62,8 @@ public class ItemManagePanel : MonoBehaviour
         this.eventService.OnBuyFromInfoPanel.AddListener(OnManageBuy);
         this.increaseAmountbutton.onClick.AddListener(OnItemQuantityIncreased);
         this.decreaseAmountbutton.onClick.AddListener(OnItemQuantityDecreased);
+        this.sellButton.onClick.AddListener(OnSellItem);
+        this.buyButton.onClick.AddListener(OnBuyItem);
     }
 
     public void OnItemQuantityIncreased()
@@ -82,7 +76,7 @@ public class ItemManagePanel : MonoBehaviour
         else
             this.itemData.buyingprice += this.itemData.buyingprice;
 
-        SetItemInfo(this.itemData);
+        SetItemInfoUI(this.itemData);
     }
 
     public void OnItemQuantityDecreased()
@@ -98,7 +92,19 @@ public class ItemManagePanel : MonoBehaviour
         else
             this.itemData.buyingprice -= this.itemData.buyingprice;
 
-        SetItemInfo(this.itemData);
+        SetItemInfoUI(this.itemData);
+    }
+
+    public void OnSellItem()
+    {
+        this.gameObject.SetActive(false);
+        eventService.OnSellFromManagePanel.RaiseEvent(itemData);
+    }
+
+    public void OnBuyItem()
+    {
+        this.gameObject.SetActive(false);
+        eventService.OnBuyFromManagePanel.RaiseEvent(itemData);
     }
 
     public void ToggleButtons(bool toggle)

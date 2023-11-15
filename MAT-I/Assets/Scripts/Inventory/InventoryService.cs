@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class InventoryService: MonoBehaviour
 {
+    [Header("SUB PANELS")]
     [SerializeField] ItemInfoPanel itemInfoPanel;
     [SerializeField] ItemManagePanel itemManagePanel;
+    [SerializeField] ConfirmationPanel confirmationPanel;
+    [Space(10)]
     [SerializeField] RectTransform itemContainer;
     [SerializeField] ItemViewUI inventorySlotPrefab;
     [SerializeField] ItemDataScriptableObject itemDataScriptableObject;
 
     private List<ItemControllerUI> inventoryItems = new List<ItemControllerUI>();
     private EventService eventService;
+    private ItemControllerUI selectedItem;
 
     public void Start()
     {
@@ -27,10 +31,13 @@ public class InventoryService: MonoBehaviour
     public void AddItem()
     {
         ItemData itemData = itemDataScriptableObject.GetItemData("Necklace");
+
+        //inventoryItems.Find(itemcontrollerUI => (itemData == itemcontrollerUI.GetData()));
+
         ItemControllerUI itemControllerUI = new ItemControllerUI(inventorySlotPrefab);
         itemControllerUI.SetData(itemData);
         itemControllerUI.SetParent(itemContainer);
-        itemControllerUI.OnItemSelected(ShowInfoPanel);
+        itemControllerUI.OnItemSelected(OnItemSelected);
         inventoryItems.Add(itemControllerUI);
     }
 
@@ -38,18 +45,30 @@ public class InventoryService: MonoBehaviour
     public void Init(EventService eventService)
     {
         this.eventService = eventService;
-
-        eventService.OnSellFromInfoPanel.AddListener(ShowItemManagePanel);
-        eventService.OnBuyFromInfoPanel.AddListener(ShowItemManagePanel);
-
+        SetEvents();
         itemInfoPanel.Init(eventService);
         itemManagePanel.Init(eventService);
+        confirmationPanel.Init(eventService);
+    }
+
+    public void SetEvents()
+    {
+        eventService.OnSellFromInfoPanel.AddListener(ShowItemManagePanel);
+        eventService.OnBuyFromInfoPanel.AddListener(ShowItemManagePanel);
+        eventService.OnSellFromManagePanel.AddListener(ShowConfirmationPanel);
+        eventService.OnBuyFromManagePanel.AddListener(ShowConfirmationPanel);
     }
 
     public void ShowItemManagePanel(ItemData itemData)
     {
-        itemManagePanel.SetItemInfo(itemData);
+        itemManagePanel.SetItemInfoUI(itemData);
         itemManagePanel.gameObject.SetActive(true);
+    }
+
+    public void OnItemSelected(ItemControllerUI itemControllerUI)
+    {
+        selectedItem = itemControllerUI;
+        ShowInfoPanel(selectedItem.GetData());
     }
 
     public void ShowInfoPanel(ItemData itemData)
@@ -57,5 +76,12 @@ public class InventoryService: MonoBehaviour
         itemInfoPanel.SetItemInfo(itemData, true);
         itemInfoPanel.gameObject.SetActive(true);
     }
+
+    public void ShowConfirmationPanel(ItemData itemData)
+    {
+        confirmationPanel.SetSellMessageText(itemData);
+        confirmationPanel.gameObject.SetActive(true);
+    }
+
 
 }
