@@ -29,6 +29,9 @@ public class ItemControllerUI
         this.itemData = itemData;
         itemViewUI.SetItemUI(this.itemData);
     }
-
+    public void DestroyItem()
+    {
+        Object.Destroy(this.itemViewUI.gameObject);
+    }
     public ItemData GetData() => this.itemData;
 }

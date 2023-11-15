@@ -12,10 +12,15 @@ public class ItemDataScriptableObject : ScriptableObject
         return items.Find(itemdata => itemdata.itemName == name);
     }
 
-    public ItemData? GetRandomItemData()
+    public ItemData GetRandomItemData()
     {
-        return null;
+        return items[Random.Range(0, items.Count)];
     }
+
+    //public ItemData? GetRandomItemData()
+    //{
+    //    return null;
+    //}
 
 }
 
