@@ -557,7 +557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &89000559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3486,6 +3486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfoPanel: {fileID: 264220778}
+  itemManagePanel: {fileID: 89000563}
   itemContainer: {fileID: 420436908}
   inventorySlotPrefab: {fileID: 5907089903566875697, guid: 3ac9231c8614d80429298b49f3f1f5ba, type: 3}
   itemDataScriptableObject: {fileID: 11400000, guid: af078c3277a013142a80888af0394d3a, type: 2}

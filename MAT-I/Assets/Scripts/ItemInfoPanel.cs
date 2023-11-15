@@ -16,9 +16,13 @@ public class ItemInfoPanel : MonoBehaviour
     [SerializeField] Button sellButton;
     [SerializeField] Button buyButton;
 
+    private EventService eventService;
+    private ItemData itemData;
+
     private void OnEnable()
     {
         sellButton.onClick.AddListener(OnSellButtonClicked);
+
     }
 
     private void OnDisable()
@@ -26,8 +30,15 @@ public class ItemInfoPanel : MonoBehaviour
         buyButton.onClick.AddListener(OnBuyButtonClicked);
     }
 
+   
+    public void Init(EventService eventService)
+    {
+        this.eventService = eventService;
+    }
+
     public void SetItemInfo(ItemData itemData,bool isSelling)
     {
+        this.itemData = itemData;
         ToggleButtons(isSelling);
 
         if (isSelling)
@@ -46,12 +57,14 @@ public class ItemInfoPanel : MonoBehaviour
 
     public void OnSellButtonClicked()
     {
-
+        this.gameObject.SetActive(false);
+        eventService.OnSellFromInfoPanel.RaiseEvent(this.itemData);
     }
 
     public void OnBuyButtonClicked()
     {
-
+        this.gameObject.SetActive(false);
+        eventService.OnBuyFromInfoPanel.RaiseEvent(this.itemData);
     }
 
     public void ToggleButtons(bool isSelling)
