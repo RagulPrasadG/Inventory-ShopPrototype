@@ -9,7 +9,7 @@ public class UIService : MonoBehaviour
     [SerializeField] InventoryService inventoryService;
 
     [Space(10)]
-    [Header("INVENTORY&SHOP PANELS")]
+    [Header("INVENTORY & SHOP PANELS")]
     [SerializeField] ItemInfoPanel itemInfoPanel;
     [SerializeField] ItemManagePanel itemManagePanel;
     [SerializeField] ConfirmationPanel confirmationPanel;
