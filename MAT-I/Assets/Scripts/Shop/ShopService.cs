@@ -55,27 +55,8 @@ public class ShopService : MonoBehaviour
 
     public void AddRandomItem()
     {
-        ItemData itemData = itemsData.GetRandomItemData();
-        ItemControllerUI itemControllerUI = new ItemControllerUI(slotPrefab);
-        itemControllerUI.SetData(itemData);
-        switch (itemData.itemType)
-        {
-            case ItemType.Materials:
-                itemControllerUI.SetParent(materialsContainer);
-                break;
-            case ItemType.Consumables:
-                itemControllerUI.SetParent(consumablesContainer);
-                break;
-            case ItemType.Weapons:
-                itemControllerUI.SetParent(weaponsContainer);
-                break;
-            case ItemType.Treasure:
-                itemControllerUI.SetParent(treasuresContainer);
-                break;
-        }
-
-        itemControllerUI.OnItemSelected(OnItemSelected);
-        shopItems.Add(itemControllerUI);
+        ItemData randomitemData = itemsData.GetRandomItemData();
+        AddItem(randomitemData);
     }
 
     public void AddItem(ItemData itemToAdd)

@@ -40,43 +40,7 @@ public class InventoryService: MonoBehaviour
     public void AddRandomItem()
     {
         ItemData randomItemData = itemDataScriptableObject.GetRandomItemData();
-        ItemControllerUI itemController = null;
-        foreach(ItemControllerUI itemControllerUI in inventoryItems)
-        {
-            ItemData itemData = itemControllerUI.GetData();
-//if we find an item that is at its maxstack then continue on to find the same item that has not reached its max stack
-            if (itemData.itemName == randomItemData.itemName)
-            {
-                if (itemData.quantity == itemData.maxStack)           
-                {
-                    continue;
-                }   
-                else
-                {
-                    itemController = itemControllerUI;
-                    break;
-                }
-                  
-            }
-        }
-
-        if (itemController != null)
-        {
-            ItemData itemData = itemController.GetData();
-            if (itemData.isStackable && itemData.quantity < itemData.maxStack)
-            {
-                if(this.inventoryWeight + itemData.weight > this.maxWeight)
-                {
-                    uIservice.ShowMessage("Cannot add more item!!!");
-                    return;
-                }
-                itemData.quantity++;
-                IncreaseInventoryWeight(itemData.weight);
-                itemController.SetData(itemData);
-                return;
-            }
-        }
-        CreateItemSlot(randomItemData);
+        AddItem(randomItemData);
     }
 
     public void AddItem(ItemData itemToadd)
