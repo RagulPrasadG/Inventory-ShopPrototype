@@ -84,21 +84,22 @@ After selecting the quantity of the item, there should be a popup asking for con
 
 <h2>When buying an item from the shop: (If conditions are satisfied)</h2>
 
-A sound will be played
-Resources will be deducted
-An overlay text will appear for a few seconds and then disappear for example: “You bought wxyz”
-The bought item will be placed in your inventory UI
-Current weight of the inventory will be increased accordingly.
+* A sound will be played
+* Resources will be deducted
+* An overlay text will appear for a few seconds and then disappear for example: “You bought wxyz”
+* The bought item will be placed in your inventory UI
+* Current weight of the inventory will be increased accordingly.
 
 <h2>When Selling an item</h2>
 
-A sound will be played
-Resources will be increased
-Inventory UI will be updated
-An overlay text will appear for a few seconds and then disappear for example: “You gained **** gold”
-The current Cumulative weight of the inventory will be decreased
+* A sound will be played
+* Resources will be increased
+* Inventory UI will be updated
+* An overlay text will appear for a few seconds and then disappear for example: “You gained **** gold”
+* The current Cumulative weight of the inventory will be decreased
   
 <h2>Design Pattern & Principles used</h2>
+
 * Observer pattern
 * MVC(Model View Controller)
 * Dependency Injection
