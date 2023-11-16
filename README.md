@@ -17,7 +17,8 @@ This is a test project for the Module Assesment Test(MAT-I) in outscal advanced 
  * Rarity
  * Quantity
 
-<span style="font-size:larger;">ItemTypes</span>
+<h1>ItemTypes</h1>
+  
 Items can be of the following types:
 * Materials
 * Weapons
