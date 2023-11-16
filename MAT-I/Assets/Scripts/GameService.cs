@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameService : MonoBehaviour
 {
+    [SerializeField] ShopService shopService;
     [SerializeField] InventoryService inventoryService;
     private EventService eventService;
 
@@ -16,6 +17,7 @@ public class GameService : MonoBehaviour
     {
         eventService = new EventService();
         inventoryService.Init(eventService);
+        shopService.Init(eventService);
     }
 
     

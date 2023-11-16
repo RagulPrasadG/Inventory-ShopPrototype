@@ -1718,7 +1718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1789,7 +1789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &284175425
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3917,7 +3917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &943883309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4545,6 +4545,7 @@ GameObject:
   - component: {fileID: 1053819700}
   - component: {fileID: 1053819702}
   - component: {fileID: 1053819701}
+  - component: {fileID: 1053819703}
   m_Layer: 5
   m_Name: ShopPanel
   m_TagString: Untagged
@@ -4616,6 +4617,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053819699}
   m_CullTransparentMesh: 1
+--- !u!114 &1053819703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053819699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeaebc6972e94f144ab72f4373022606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInfoPanel: {fileID: 264220778}
+  itemManagePanel: {fileID: 89000563}
+  confirmationPanel: {fileID: 381106432}
+  materialsContainer: {fileID: 284175425}
+  weaponsContainer: {fileID: 1723559350}
+  treasuresContainer: {fileID: 1296008674}
+  consumablesContainer: {fileID: 943883309}
+  materialsTab: {fileID: 1602488470}
+  weaponsTab: {fileID: 630010223}
+  treasuresTab: {fileID: 1862196600}
+  consumablesTab: {fileID: 2117260543}
+  itemsData: {fileID: 11400000, guid: af078c3277a013142a80888af0394d3a, type: 2}
+  slotPrefab: {fileID: 5907089903566875697, guid: 3ac9231c8614d80429298b49f3f1f5ba, type: 3}
 --- !u!1 &1086639272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,7 +5232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5599,7 +5625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1296008674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6626,7 +6652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1723559350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6972,6 +6998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdc42454e1b9304498d6a8cbc2d561e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopService: {fileID: 1053819703}
   inventoryService: {fileID: 1086639274}
 --- !u!1 &1964508840
 GameObject:
@@ -7026,7 +7053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
