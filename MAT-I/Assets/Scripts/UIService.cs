@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIService : MonoBehaviour
 {
+
+    [SerializeField] TMP_Text messageText;
+
+    [Space(10)]
     [Header("SERVICES")]
     [SerializeField] ShopService shopService;
     [SerializeField] InventoryService inventoryService;
@@ -23,8 +28,14 @@ public class UIService : MonoBehaviour
         this.itemInfoPanel.Init(eventService);
         this.itemManagePanel.Init(eventService);
         this.confirmationPanel.Init(eventService);
-        shopService.Init(eventService,itemInfoPanel, itemManagePanel, confirmationPanel);
-        inventoryService.Init(eventService,itemInfoPanel,itemManagePanel,confirmationPanel);
+        shopService.Init(this,eventService,itemInfoPanel, itemManagePanel, confirmationPanel);
+        inventoryService.Init(this,eventService,itemInfoPanel,itemManagePanel,confirmationPanel);
+    }
+
+    public void ShowMessage(string message)
+    {
+        messageText.text = message;
+        messageText.gameObject.SetActive(true);
     }
 
 }

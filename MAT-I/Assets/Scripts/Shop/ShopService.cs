@@ -40,6 +40,7 @@ public class ShopService : MonoBehaviour
     private List<ItemControllerUI> shopItems = new List<ItemControllerUI>();
     private ItemControllerUI selectedItem;
     private EventService eventService;
+    private UIService uIService;
 
     private void Start()
     {
@@ -75,10 +76,11 @@ public class ShopService : MonoBehaviour
         shopItems.Add(itemControllerUI);
     }
 
-    public void Init(EventService eventService,ItemInfoPanel itemInfopanel,ItemManagePanel itemManagePanel,
+    public void Init(UIService uIService,EventService eventService,ItemInfoPanel itemInfopanel,ItemManagePanel itemManagePanel,
         ConfirmationPanel confirmationpanel)
     {
         this.eventService = eventService;
+        this.uIService = uIService;
         this.itemInfoPanel = itemInfopanel;
         this.itemManagePanel = itemManagePanel;
         this.confirmationPanel = confirmationpanel;

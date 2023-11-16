@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryService: MonoBehaviour
 {
-    [SerializeField] TMPro.TMP_Text inventoryWeightText;
+    [SerializeField] TMP_Text inventoryWeightText;
     [SerializeField] RectTransform itemContainer;
     [SerializeField] ItemViewUI inventorySlotPrefab;
     [SerializeField] ItemDataScriptableObject itemDataScriptableObject;
@@ -18,10 +19,12 @@ public class InventoryService: MonoBehaviour
     #endregion 
 
     private List<ItemControllerUI> inventoryItems = new List<ItemControllerUI>();
-    private EventService eventService;
     private ItemControllerUI selectedItem;
     private int inventoryWeight;
 
+
+    private EventService eventService;
+    private UIService uIservice;
     public void Start()
     {
         AddItem();
@@ -81,11 +84,12 @@ public class InventoryService: MonoBehaviour
         IncreaseInventoryWeight(itemData.weight);
     }
 
-    public void Init(EventService eventService,ItemInfoPanel itemInfoPanel,
+    public void Init(UIService uIservice,EventService eventService,ItemInfoPanel itemInfoPanel,
         ItemManagePanel itemManagePanel,
         ConfirmationPanel confirmationPanel)
     {
         this.eventService = eventService;
+        this.uIservice = uIservice;
         this.itemInfoPanel = itemInfoPanel;
         this.itemManagePanel = itemManagePanel;
         this.confirmationPanel = confirmationPanel;
@@ -117,7 +121,7 @@ public class InventoryService: MonoBehaviour
             DecreaseInventoryWeight(selecteditemData.weight);
             selectedItem.DestroyItem();
         }
-            
+        uIservice.ShowMessage($"You gained {sellingItemdata.sellingprice} coins!!");
         selectedItem.SetData(selecteditemData);
         
     }
