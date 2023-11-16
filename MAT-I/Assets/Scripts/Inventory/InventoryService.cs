@@ -71,7 +71,7 @@ public class InventoryService: MonoBehaviour
             {
                 if (this.inventoryWeight + itemData.weight > this.maxWeight)
                 {
-                    uIservice.ShowMessage("Cannot add more item!!!");
+                    uIservice.ShowMessage("Cannot add this item the inventory might be full!!!");
                     return;
                 }
                 itemData.quantity++;
@@ -86,9 +86,9 @@ public class InventoryService: MonoBehaviour
 
     public void CreateItemSlot(ItemData itemData)
     {
-        if (this.inventoryWeight  >= this.maxWeight)
+        if (this.inventoryWeight + itemData.weight  >= this.maxWeight)
         {
-            uIservice.ShowMessage("The inventory is Full!!!");
+            uIservice.ShowMessage("Cannot add this item the inventory might be full!!!");
             return;
         }
 

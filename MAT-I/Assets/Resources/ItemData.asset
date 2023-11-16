@@ -80,3 +80,108 @@ MonoBehaviour:
     quantity: 1
     isStackable: 1
     maxStack: 50
+  - itemName: Mushroom
+    icon: {fileID: 21300000, guid: 6270d46c6c1104b448fb5bac5bede74d, type: 3}
+    description: 'the normal edible mushroom ready to be added as an ingredient
+
+'
+    buyingprice: 5
+    sellingprice: 4
+    weight: 0.01
+    itemType: 2
+    rarity: 0
+    quantity: 1
+    isStackable: 1
+    maxStack: 100
+  - itemName: Eagle Shield
+    icon: {fileID: 21300000, guid: f270ae2815e437842921f264c20b5271, type: 3}
+    description: 'Strong and sustainable in battle field to hold enemies back
+
+'
+    buyingprice: 500
+    sellingprice: 400
+    weight: 4
+    itemType: 1
+    rarity: 1
+    quantity: 1
+    isStackable: 1
+    maxStack: 100
+  - itemName: River Fish
+    icon: {fileID: 21300000, guid: b416145d20baa364598d07e1740ae2fb, type: 3}
+    description: Rich in protein gives quick recovery and restores health to full
+    buyingprice: 50
+    sellingprice: 35
+    weight: 1
+    itemType: 2
+    rarity: 0
+    quantity: 1
+    isStackable: 1
+    maxStack: 100
+  - itemName: Gold Bar
+    icon: {fileID: 21300000, guid: a0c46bd0ce09e0d479ad2962809f906f, type: 3}
+    description: Imported from the mighty cholas strong and expandable just like
+      their reign
+    buyingprice: 1500
+    sellingprice: 1000
+    weight: 5
+    itemType: 2
+    rarity: 2
+    quantity: 1
+    isStackable: 1
+    maxStack: 5
+  - itemName: Green Medicine
+    icon: {fileID: 21300000, guid: 0edcb30428af9c34b9114c75ee984bf2, type: 3}
+    description: 'Gives quick relief from  skin allergies and airbone diseases '
+    buyingprice: 1500
+    sellingprice: 1000
+    weight: 5
+    itemType: 2
+    rarity: 2
+    quantity: 1
+    isStackable: 1
+    maxStack: 5
+  - itemName: Wooden Log
+    icon: {fileID: 21300000, guid: 65c59ccc59b5690458cb9e5324edc5dc, type: 3}
+    description: 'Gives quick relief from  skin allergies and airbone diseases '
+    buyingprice: 1500
+    sellingprice: 1000
+    weight: 80
+    itemType: 0
+    rarity: 0
+    quantity: 1
+    isStackable: 1
+    maxStack: 1
+  - itemName: Leather Hood
+    icon: {fileID: 21300000, guid: 9d7e931295e92b8419dde467e5f709b8, type: 3}
+    description: Warm and comfy in cold temperatures
+    buyingprice: 100
+    sellingprice: 60
+    weight: 0.5
+    itemType: 0
+    rarity: 0
+    quantity: 1
+    isStackable: 1
+    maxStack: 5
+  - itemName: Treasure Map
+    icon: {fileID: 21300000, guid: 0a4e4ed28cc111a418bd671fe19adab0, type: 3}
+    description: The path to the forbidden valuables of a king
+    buyingprice: 5000
+    sellingprice: 4000
+    weight: 0.1
+    itemType: 3
+    rarity: 4
+    quantity: 1
+    isStackable: 1
+    maxStack: 10
+  - itemName: Red stone
+    icon: {fileID: 21300000, guid: 1200fd4c89ff9654483fdc0805358f5e, type: 3}
+    description: The costliest stone in the world which is only available to the
+      elites
+    buyingprice: 10000
+    sellingprice: 95000
+    weight: 1
+    itemType: 3
+    rarity: 4
+    quantity: 1
+    isStackable: 1
+    maxStack: 5
