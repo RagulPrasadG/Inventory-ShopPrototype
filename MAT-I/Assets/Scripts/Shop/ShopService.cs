@@ -78,9 +78,6 @@ public class ShopService : MonoBehaviour
     {
         this.eventService = eventService;
         SetEvents();
-        itemInfoPanel.Init(eventService);
-        itemManagePanel.Init(eventService);
-        confirmationPanel.Init(eventService);
     }
 
     public void SetEvents()
