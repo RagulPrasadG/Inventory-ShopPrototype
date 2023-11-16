@@ -42,14 +42,9 @@ public class InventoryService: MonoBehaviour
         itemControllerUI.SetParent(itemContainer);
         itemControllerUI.OnItemSelected(OnItemSelected);
         inventoryItems.Add(itemControllerUI);
-        this.inventoryWeight += itemData.weight;
-        SetInventoryWeightText();
+        IncreaseInventoryWeight(itemData.weight);
     }
 
-    public void RemoveItem()
-    {
-
-    }
 
     public void Init(EventService eventService,ItemInfoPanel itemInfoPanel,
         ItemManagePanel itemManagePanel,
