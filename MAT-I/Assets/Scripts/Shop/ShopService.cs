@@ -13,6 +13,14 @@ public class ShopService : MonoBehaviour
 
     [Space(10)]
     [Header("CONTAINERS")]
+    [SerializeField] RectTransform materialsScrollView;
+    [SerializeField] RectTransform weaponsScrollView;
+    [SerializeField] RectTransform treasuresScrollView;
+    [SerializeField] RectTransform consumablesScrollView;
+
+
+    [Space(10)]
+    [Header("CONTAINERS")]
     [SerializeField] RectTransform materialsContainer;
     [SerializeField] RectTransform weaponsContainer;
     [SerializeField] RectTransform treasuresContainer;
@@ -38,6 +46,7 @@ public class ShopService : MonoBehaviour
         {
             AddItem();
         }
+        materialsTab.Select();
     }
 
     public void AddItem()
@@ -88,25 +97,25 @@ public class ShopService : MonoBehaviour
     public void OnClickMaterialsTab()
     {
         TogglePanels(false);
-        materialsContainer.gameObject.SetActive(true);
+        materialsScrollView.gameObject.SetActive(true);
     }
 
     public void OnClickTreasuresTab()
     {
         TogglePanels(false);
-        treasuresContainer.gameObject.SetActive(true);
+        treasuresScrollView.gameObject.SetActive(true);
     }
 
     public void OnClickConsumablesTab()
     {
         TogglePanels(false);
-        consumablesContainer.gameObject.SetActive(true);
+        consumablesScrollView.gameObject.SetActive(true);
     }
 
     public void OnClickWeaponsTab()
     {
         TogglePanels(false);
-        weaponsContainer.gameObject.SetActive(true);
+        weaponsScrollView.gameObject.SetActive(true);
     }
 
     public void BuyItem(ItemData itemdata)
@@ -128,10 +137,10 @@ public class ShopService : MonoBehaviour
 
     public void TogglePanels(bool toggle)
     {
-        materialsContainer.gameObject.SetActive(toggle);
-        weaponsContainer.gameObject.SetActive(toggle);
-        consumablesContainer.gameObject.SetActive(toggle);
-        treasuresContainer.gameObject.SetActive(toggle);
+        materialsScrollView.gameObject.SetActive(toggle);
+        weaponsScrollView.gameObject.SetActive(toggle);
+        consumablesScrollView.gameObject.SetActive(toggle);
+        treasuresScrollView.gameObject.SetActive(toggle);
     }
 
     public void ShowItemManagePanel(ItemData itemData)
