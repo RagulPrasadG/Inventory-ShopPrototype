@@ -32,14 +32,14 @@ public class ItemInfoPanel : MonoBehaviour
         ToggleButtons(isSelling);
 
         if (isSelling)
-            this.itemCostText.text = $"Cost - {itemData.sellingprice}";
+            this.itemCostText.text = $"{itemData.sellingprice}";
         else
-            this.itemCostText.text = $"Cost - {itemData.buyingprice}";
+            this.itemCostText.text = $"{itemData.buyingprice}";
 
         this.itemDescriptionText.text = itemData.description;
         this.itemNameText.text = itemData.itemName;
         this.itemAmountText.text = $"X{itemData.quantity}";
-        this.itemWeightText.text = $"Weight - {itemData.weight}kg";
+        this.itemWeightText.text = $"{itemData.weight}kg";
         this.itemIcon.sprite = itemData.icon;
     }
 

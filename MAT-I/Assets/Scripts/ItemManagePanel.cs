@@ -23,8 +23,8 @@ public class ItemManagePanel : MonoBehaviour
 
     [Header("Item Stats")]
     private int totalQuantity;
-    private int totalWeight;
-    private float totalCost;
+    private float totalWeight;
+    private int totalCost;
 
     private bool isSelling;
     private EventService eventService;

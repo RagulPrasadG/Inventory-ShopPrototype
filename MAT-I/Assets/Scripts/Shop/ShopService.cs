@@ -39,19 +39,21 @@ public class ShopService : MonoBehaviour
 
     private List<ItemControllerUI> shopItems = new List<ItemControllerUI>();
     private ItemControllerUI selectedItem;
+
+    private GameService gameService;
     private EventService eventService;
     private UIService uIService;
 
     private void Start()
     {
-        for(int i = 0;i<20;i++)
+        for(int i = 0;i<100;i++)
         {
-            AddItem();
+            AddRandomItem();
         }
         materialsTab.Select();
     }
 
-    public void AddItem()
+    public void AddRandomItem()
     {
         ItemData itemData = itemsData.GetRandomItemData();
         ItemControllerUI itemControllerUI = new ItemControllerUI(slotPrefab);
@@ -76,9 +78,70 @@ public class ShopService : MonoBehaviour
         shopItems.Add(itemControllerUI);
     }
 
-    public void Init(UIService uIService,EventService eventService,ItemInfoPanel itemInfopanel,ItemManagePanel itemManagePanel,
+    public void AddItem(ItemData itemToAdd)
+    {
+        ItemControllerUI itemController = null;
+        foreach (ItemControllerUI itemControllerUI in shopItems)
+        {
+            ItemData itemdata = itemControllerUI.GetData();
+            //if we find an item that is at its maxstack then continue on to find the same item that has not reached its max stack
+            if (itemdata.itemName == itemToAdd.itemName)
+            {
+                if (itemdata.quantity == itemToAdd.maxStack)
+                {
+                    continue;
+                }
+                else
+                {
+                    itemController = itemControllerUI;
+                    break;
+                }
+            }
+        }
+
+        if (itemController != null)
+        {
+            ItemData itemData = itemController.GetData();
+            if (itemData.isStackable && itemData.quantity < itemData.maxStack)
+            {
+                itemData.quantity++;
+                itemController.SetData(itemData);
+                return;
+            }
+        }
+        CreateItemSlot(itemToAdd);
+    }
+
+    public void CreateItemSlot(ItemData itemData)
+    {
+        ItemControllerUI itemControllerUI = new ItemControllerUI(slotPrefab);
+        itemControllerUI.SetData(itemData);
+        switch (itemData.itemType)
+        {
+            case ItemType.Materials:
+                itemControllerUI.SetParent(materialsContainer);
+                break;
+            case ItemType.Consumables:
+                itemControllerUI.SetParent(consumablesContainer);
+                break;
+            case ItemType.Weapons:
+                itemControllerUI.SetParent(weaponsContainer);
+                break;
+            case ItemType.Treasure:
+                itemControllerUI.SetParent(treasuresContainer);
+                break;
+        }
+
+        itemControllerUI.OnItemSelected(OnItemSelected);
+        shopItems.Add(itemControllerUI);
+    }
+
+    public void Init(GameService gameService,UIService uIService,EventService eventService
+        ,ItemInfoPanel itemInfopanel
+        ,ItemManagePanel itemManagePanel,
         ConfirmationPanel confirmationpanel)
     {
+        this.gameService = gameService;
         this.eventService = eventService;
         this.uIService = uIService;
         this.itemInfoPanel = itemInfopanel;
@@ -91,7 +154,8 @@ public class ShopService : MonoBehaviour
     {
         eventService.OnBuyFromInfoPanel.AddListener(ShowItemManagePanel);
         eventService.OnBuyFromManagePanel.AddListener(ShowConfirmationPanel);
-        eventService.OnBuyItem.AddListener(BuyItem);
+        eventService.OnBuyFromConfirmationPanel.AddListener(BuyItem);
+        eventService.OnSellItem.AddListener(AddItem);
         materialsTab.onClick.AddListener(OnClickMaterialsTab);
         treasuresTab.onClick.AddListener(OnClickTreasuresTab);
         consumablesTab.onClick.AddListener(OnClickConsumablesTab);
@@ -122,9 +186,29 @@ public class ShopService : MonoBehaviour
         weaponsScrollView.gameObject.SetActive(true);
     }
 
-    public void BuyItem(ItemData itemdata)
+    public void BuyItem(ItemData buyingitemdata)
     {
-        Debug.Log("Bought!!");
+        if(buyingitemdata.buyingprice > this.gameService.coins)
+        {
+            uIService.ShowMessage("Not enough coins to buy this!!");
+            return;
+        }
+
+        ItemData selectedItemData = selectedItem.GetData();
+        if (selectedItem.GetData().quantity > buyingitemdata.quantity)
+        {
+            selectedItemData.quantity -= buyingitemdata.quantity;
+        }
+        else
+        {
+            shopItems.Remove(selectedItem);
+            selectedItem.DestroyItem();
+        }
+
+        uIService.ShowMessage($"You bought {buyingitemdata.itemName}!!");
+        selectedItem.SetData(selectedItemData);
+
+        this.eventService.OnBuyItem.RaiseEvent(buyingitemdata);
     }
 
     public void OnItemSelected(ItemControllerUI itemControllerUI)
@@ -156,7 +240,7 @@ public class ShopService : MonoBehaviour
 
     public void ShowConfirmationPanel(ItemData itemData)
     {
-        confirmationPanel.SetItemData(itemData);
+        confirmationPanel.SetItemData(itemData,false);
         confirmationPanel.SetBuyMessageText(itemData);
         confirmationPanel.gameObject.SetActive(true);
     }

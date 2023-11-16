@@ -18,7 +18,7 @@ MonoBehaviour:
     description: The jewel of the unknown soccerer believed to have special powers
     buyingprice: 2000
     sellingprice: 1000
-    weight: 3
+    weight: 0.5
     itemType: 3
     rarity: 2
     quantity: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     description: Pure and shiny wedding rings imported from the eastern region
     buyingprice: 1000
     sellingprice: 800
-    weight: 40
+    weight: 0.1
     itemType: 3
     rarity: 1
     quantity: 1
@@ -74,7 +74,7 @@ MonoBehaviour:
     description: The local currency of the rome outskirts
     buyingprice: 30
     sellingprice: 25
-    weight: 1
+    weight: 0.6
     itemType: 3
     rarity: 0
     quantity: 1

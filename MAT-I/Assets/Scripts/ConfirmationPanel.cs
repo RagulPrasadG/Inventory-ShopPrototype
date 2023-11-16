@@ -11,10 +11,16 @@ public class ConfirmationPanel : MonoBehaviour
 
     private EventService eventService;
     private ItemData itemData;
+    private bool isSelling;
 
     private void OnYesButtonClicked()
     {
-        eventService.OnSellItem.RaiseEvent(this.itemData);
+        if(isSelling)
+           eventService.OnSellFromConfirmationPanel.RaiseEvent(this.itemData);
+        else
+           eventService.OnBuyFromConfirmationPanel.RaiseEvent(this.itemData);
+
+
         this.gameObject.SetActive(false);
     }
 
@@ -25,9 +31,10 @@ public class ConfirmationPanel : MonoBehaviour
         noButton.onClick.AddListener(OnNoButtonClicked);
     }
 
-    public void SetItemData(ItemData itemdata)
+    public void SetItemData(ItemData itemdata,bool isSelling)
     {
         this.itemData = itemdata;
+        this.isSelling = isSelling;
     }
 
     public void SetBuyMessageText(ItemData itemdata)
