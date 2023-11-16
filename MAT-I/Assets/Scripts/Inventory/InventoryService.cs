@@ -79,14 +79,12 @@ public class InventoryService: MonoBehaviour
         if (selecteditemData.quantity > sellingItemdata.quantity)
         {
             selecteditemData.quantity -= sellingItemdata.quantity;
-            this.inventoryWeight -= selecteditemData.weight;
-            SetInventoryWeightText();
+            IncreaseInventoryWeight(selecteditemData.weight);
         }
         else
         {
             inventoryItems.Remove(selectedItem);
-            this.inventoryWeight -= selecteditemData.weight;
-            SetInventoryWeightText();
+            DecreaseInventoryWeight(selecteditemData.weight);
             selectedItem.DestroyItem();
         }
             
@@ -110,6 +108,18 @@ public class InventoryService: MonoBehaviour
     {
         itemInfoPanel.SetItemInfo(itemData, true);
         itemInfoPanel.gameObject.SetActive(true);
+    }
+
+    public void DecreaseInventoryWeight(int weight)
+    {
+        this.inventoryWeight -= weight;
+        SetInventoryWeightText();
+    }
+
+    public void IncreaseInventoryWeight(int weight)
+    {
+        this.inventoryWeight += weight;
+        SetInventoryWeightText();
     }
 
     public void SetInventoryWeightText()
