@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryService: MonoBehaviour
 {
-
+    [SerializeField] TMPro.TMP_Text inventoryWeightText;
     [SerializeField] RectTransform itemContainer;
     [SerializeField] ItemViewUI inventorySlotPrefab;
     [SerializeField] ItemDataScriptableObject itemDataScriptableObject;
@@ -20,6 +20,7 @@ public class InventoryService: MonoBehaviour
     private List<ItemControllerUI> inventoryItems = new List<ItemControllerUI>();
     private EventService eventService;
     private ItemControllerUI selectedItem;
+    private int inventoryWeight;
 
     public void Start()
     {
@@ -41,8 +42,14 @@ public class InventoryService: MonoBehaviour
         itemControllerUI.SetParent(itemContainer);
         itemControllerUI.OnItemSelected(OnItemSelected);
         inventoryItems.Add(itemControllerUI);
+        this.inventoryWeight += itemData.weight;
+        SetInventoryWeightText();
     }
 
+    public void RemoveItem()
+    {
+
+    }
 
     public void Init(EventService eventService,ItemInfoPanel itemInfoPanel,
         ItemManagePanel itemManagePanel,
@@ -72,10 +79,14 @@ public class InventoryService: MonoBehaviour
         if (selecteditemData.quantity > sellingItemdata.quantity)
         {
             selecteditemData.quantity -= sellingItemdata.quantity;
+            this.inventoryWeight -= selecteditemData.weight;
+            SetInventoryWeightText();
         }
         else
         {
             inventoryItems.Remove(selectedItem);
+            this.inventoryWeight -= selecteditemData.weight;
+            SetInventoryWeightText();
             selectedItem.DestroyItem();
         }
             
@@ -99,6 +110,11 @@ public class InventoryService: MonoBehaviour
     {
         itemInfoPanel.SetItemInfo(itemData, true);
         itemInfoPanel.gameObject.SetActive(true);
+    }
+
+    public void SetInventoryWeightText()
+    {
+        this.inventoryWeightText.text = $"Weight-{inventoryWeight}kg";
     }
 
     public void ShowConfirmationPanel(ItemData itemData)

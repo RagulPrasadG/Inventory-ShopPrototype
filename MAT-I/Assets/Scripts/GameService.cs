@@ -5,8 +5,6 @@ using UnityEngine;
 public class GameService : MonoBehaviour
 {
     [SerializeField] UIService uIService;
-
-
     private EventService eventService;
 
     private void Start()
