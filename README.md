@@ -28,13 +28,13 @@ The shop UI will have 4 tabs for each item type
 Selecting a tab will display available items of that type in the shop.
 
 
-#**Selling & Buying Price**
+<h1>Selling & Buying Price</h1>
 
 When an item is in the shop, selecting that item should show it’s buying price
 When an item is in the inventory, selecting that should show it’s selling price
 
 
-#**Weight**
+<h1>Weight</h1>
 
 There would be a maximum weight the Player can carry in their inventory.
 Each item will have a certain weight.
@@ -42,7 +42,7 @@ When an item is bought or sold the player’s inventory weight will be updated a
 The cumulative weight of all the items in the player inventory should always be less than the Maximum Weight.
 
 
-#**Rarity**
+<h1>Rarity</h1>
 
 Each item can be of any of the below Rarity Levels:
 * Very Common
@@ -53,7 +53,7 @@ Each item can be of any of the below Rarity Levels:
 The Value of the item will accordingly be more or less.
 
 
-#**Icon & Description**
+<h1>Icon & Description</h1>
 
 Each item will have a unique Icon and Text Description
 Any of the Items in inventory or the shop when selected, its icon, description, value, weight, and any other details will be shown in UI like in the below reference image:
@@ -61,7 +61,7 @@ Any of the Items in inventory or the shop when selected, its icon, description, 
 The layout of your game screen can be designed and tweaked according to your preferences as long as all the features are implemented correctly.
 
 
-#**Gathering Resources**
+<h1>Gathering Resources</h1>
 
 At the bottom, there should be a button to gather resources.
 Initially, the player will have nothing in the inventory and no money as well.
@@ -70,7 +70,7 @@ The rarity of items gathered will be directly proportional to the cumulative val
 If the inventory’s weight offshoots the maximum weight that can be carried, the gathering resources button will not work and a popup will be shown to indicate the same to the player.
 
 
-#**Buying and Selling Items**
+<h1>Buying & Selling Items</h1>
 
 Each Item in the shop when selected will show a Buy Button while showing its details.
 If you have enough money you can buy that item and it will shift in your inventory.
@@ -82,7 +82,7 @@ Player can increase or decrease the quantity of the item using ‘+’ and ‘-�
 After selecting the quantity of the item, there should be a popup asking for conformation.
 
 
-#**When buying an item from the shop: (If conditions are satisfied)**
+<h1>When buying an item from the shop: (If conditions are satisfied)</h1>
 
 A sound will be played
 Resources will be deducted
@@ -90,7 +90,7 @@ An overlay text will appear for a few seconds and then disappear for example: �
 The bought item will be placed in your inventory UI
 Current weight of the inventory will be increased accordingly.
 
-#**When Selling an item:**
+<h1>When Selling an item</h1>
 
 A sound will be played
 Resources will be increased
@@ -98,7 +98,7 @@ Inventory UI will be updated
 An overlay text will appear for a few seconds and then disappear for example: “You gained **** gold”
 The current Cumulative weight of the inventory will be decreased
   
-#**Design Pattern & Principles Used:**
+<h1>Design Pattern & Principles used</h1>
 * Observer pattern
 * MVC(Model View Controller)
 * Dependency Injection
