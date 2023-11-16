@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class InventoryService: MonoBehaviour
 {
-    [Header("SUB PANELS")]
-    [SerializeField] ItemInfoPanel itemInfoPanel;
-    [SerializeField] ItemManagePanel itemManagePanel;
-    [SerializeField] ConfirmationPanel confirmationPanel;
+    
     [Space(10)]
     [SerializeField] RectTransform itemContainer;
     [SerializeField] ItemViewUI inventorySlotPrefab;
     [SerializeField] ItemDataScriptableObject itemDataScriptableObject;
+
+
+    #region SubPanels
+    private ItemInfoPanel itemInfoPanel;
+    private ItemManagePanel itemManagePanel;
+    private ConfirmationPanel confirmationPanel;
+    #endregion 
 
     private List<ItemControllerUI> inventoryItems = new List<ItemControllerUI>();
     private EventService eventService;
@@ -44,13 +48,15 @@ public class InventoryService: MonoBehaviour
     }
 
 
-    public void Init(EventService eventService)
+    public void Init(EventService eventService,ItemInfoPanel itemInfoPanel,
+        ItemManagePanel itemManagePanel,
+        ConfirmationPanel confirmationPanel)
     {
         this.eventService = eventService;
+        this.itemInfoPanel = itemInfoPanel;
+        this.itemManagePanel = itemManagePanel;
+        this.confirmationPanel = confirmationPanel;
         SetEvents();
-        itemInfoPanel.Init(eventService);
-        itemManagePanel.Init(eventService);
-        confirmationPanel.Init(eventService);
     }
 
     public void SetEvents()

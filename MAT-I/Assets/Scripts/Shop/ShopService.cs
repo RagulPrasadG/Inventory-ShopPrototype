@@ -5,12 +5,6 @@ using UnityEngine.UI;
 
 public class ShopService : MonoBehaviour
 {
-
-    [Header("PANELS")]
-    [SerializeField] ItemInfoPanel itemInfoPanel;
-    [SerializeField] ItemManagePanel itemManagePanel;
-    [SerializeField] ConfirmationPanel confirmationPanel;
-
     [Space(10)]
     [Header("CONTAINERS")]
     [SerializeField] RectTransform materialsScrollView;
@@ -35,6 +29,13 @@ public class ShopService : MonoBehaviour
 
     [SerializeField] ItemDataScriptableObject itemsData;
     [SerializeField] ItemViewUI slotPrefab;
+
+
+    #region SubPanels
+    private ItemInfoPanel itemInfoPanel;
+    private ItemManagePanel itemManagePanel;
+    private ConfirmationPanel confirmationPanel;
+    #endregion 
 
     private List<ItemControllerUI> shopItems = new List<ItemControllerUI>();
     private ItemControllerUI selectedItem;
@@ -74,9 +75,13 @@ public class ShopService : MonoBehaviour
         shopItems.Add(itemControllerUI);
     }
 
-    public void Init(EventService eventService)
+    public void Init(EventService eventService,ItemInfoPanel itemInfopanel,ItemManagePanel itemManagePanel,
+        ConfirmationPanel confirmationpanel)
     {
         this.eventService = eventService;
+        this.itemInfoPanel = itemInfopanel;
+        this.itemManagePanel = itemManagePanel;
+        this.confirmationPanel = confirmationpanel;
         SetEvents();
     }
 
