@@ -11,6 +11,7 @@ public class InventoryService: MonoBehaviour
     [SerializeField] ItemViewUI inventorySlotPrefab;
     [SerializeField] ItemDataScriptableObject itemDataScriptableObject;
     [SerializeField] Button gatherResourcesButton;
+    [SerializeField] AudioSource audioSource;
 
     [Space(10)]
     [Header("Stats")]
@@ -30,6 +31,7 @@ public class InventoryService: MonoBehaviour
     private GameService gameService;
     private EventService eventService;
     private UIService uIservice;
+    private SoundServiceScriptableObject soundServiceSO;
 
     private void OnDisable()
     {
@@ -100,10 +102,11 @@ public class InventoryService: MonoBehaviour
         IncreaseInventoryWeight(itemData.weight);
     }
 
-    public void Init(GameService gameService,UIService uIservice,EventService eventService,ItemInfoPanel itemInfoPanel,
+    public void Init(GameService gameService, SoundServiceScriptableObject soundServiceSO, UIService uIservice,EventService eventService,ItemInfoPanel itemInfoPanel,
         ItemManagePanel itemManagePanel,
         ConfirmationPanel confirmationPanel)
     {
+        this.soundServiceSO = soundServiceSO;
         this.gameService = gameService;
         this.eventService = eventService;
         this.uIservice = uIservice;
@@ -142,6 +145,7 @@ public class InventoryService: MonoBehaviour
         uIservice.ShowMessage($"You gained {sellingItemdata.sellingprice} coins!!");
         selectedItem.SetData(selecteditemData);
 
+        soundServiceSO.PlaySFX(SoundType.ItemSold, audioSource);
         this.eventService.OnSellItem.RaiseEvent(sellingItemdata);
     }
 

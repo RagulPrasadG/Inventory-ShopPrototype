@@ -27,15 +27,15 @@ public class UIService : MonoBehaviour
     private EventService eventService;
     private GameService gameService;
 
-    public void Init(GameService gameService,EventService eventService)
+    public void Init(GameService gameService,SoundServiceScriptableObject soundService,EventService eventService)
     {
         this.gameService = gameService;
         this.eventService = eventService;
         this.itemInfoPanel.Init(eventService);
         this.itemManagePanel.Init(eventService);
         this.confirmationPanel.Init(eventService);
-        shopService.Init(gameService,this,eventService,itemInfoPanel, itemManagePanel, confirmationPanel);
-        inventoryService.Init(gameService,this,eventService,itemInfoPanel,itemManagePanel,confirmationPanel);
+        shopService.Init(gameService, soundService, this,eventService,itemInfoPanel, itemManagePanel, confirmationPanel);
+        inventoryService.Init(gameService,soundService,this,eventService,itemInfoPanel,itemManagePanel,confirmationPanel);
         SetCoinText();
     }
 

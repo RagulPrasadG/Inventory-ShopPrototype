@@ -29,6 +29,7 @@ public class ShopService : MonoBehaviour
 
     [SerializeField] ItemDataScriptableObject itemsData;
     [SerializeField] ItemViewUI slotPrefab;
+    [SerializeField] AudioSource audioSource;
 
 
     #region SubPanels
@@ -43,6 +44,7 @@ public class ShopService : MonoBehaviour
     private GameService gameService;
     private EventService eventService;
     private UIService uIService;
+    private SoundServiceScriptableObject soundServiceSO;
 
     private void Start()
     {
@@ -117,11 +119,13 @@ public class ShopService : MonoBehaviour
         shopItems.Add(itemControllerUI);
     }
 
-    public void Init(GameService gameService,UIService uIService,EventService eventService
+    public void Init(GameService gameService,SoundServiceScriptableObject soundServiceSO
+        ,UIService uIService,EventService eventService
         ,ItemInfoPanel itemInfopanel
         ,ItemManagePanel itemManagePanel,
         ConfirmationPanel confirmationpanel)
     {
+        this.soundServiceSO = soundServiceSO;
         this.gameService = gameService;
         this.eventService = eventService;
         this.uIService = uIService;
@@ -145,25 +149,25 @@ public class ShopService : MonoBehaviour
 
     public void OnClickMaterialsTab()
     {
-        TogglePanels(false);
+        ToggleScrollViews(false);
         materialsScrollView.gameObject.SetActive(true);
     }
 
     public void OnClickTreasuresTab()
     {
-        TogglePanels(false);
+        ToggleScrollViews(false);
         treasuresScrollView.gameObject.SetActive(true);
     }
 
     public void OnClickConsumablesTab()
     {
-        TogglePanels(false);
+        ToggleScrollViews(false);
         consumablesScrollView.gameObject.SetActive(true);
     }
 
     public void OnClickWeaponsTab()
     {
-        TogglePanels(false);
+        ToggleScrollViews(false);
         weaponsScrollView.gameObject.SetActive(true);
     }
 
@@ -188,7 +192,7 @@ public class ShopService : MonoBehaviour
 
         uIService.ShowMessage($"You bought {buyingitemdata.itemName}!!");
         selectedItem.SetData(selectedItemData);
-
+        this.soundServiceSO.PlaySFX(SoundType.ItemBought, audioSource);
         this.eventService.OnBuyItem.RaiseEvent(buyingitemdata);
     }
 
@@ -204,7 +208,7 @@ public class ShopService : MonoBehaviour
         itemInfoPanel.gameObject.SetActive(true);
     }
 
-    public void TogglePanels(bool toggle)
+    public void ToggleScrollViews(bool toggle)
     {
         materialsScrollView.gameObject.SetActive(toggle);
         weaponsScrollView.gameObject.SetActive(toggle);

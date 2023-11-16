@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class GameService : MonoBehaviour
 {
-    [SerializeField] UIService uIService;
-    private EventService eventService;
     public int coins { get; set; }
+
+    [SerializeField] UIService uIService;
+    [Space(10)]
+    [Header("ScriptableObjects")]
+    [SerializeField] SoundServiceScriptableObject soundServiceSO;
+
+    private EventService eventService;
+
+
 
     private void OnDisable()
     {
@@ -39,7 +46,7 @@ public class GameService : MonoBehaviour
     private void SetDependencies()
     {
         eventService = new EventService();
-        uIService.Init(this,eventService);
+        uIService.Init(this,soundServiceSO,eventService);
 
     }
 
