@@ -16,6 +16,7 @@ public class UIService : MonoBehaviour
 
 
     private EventService eventService;
+    private MessageLogger messageLogger;
 
     public void Init(EventService eventService)
     {
