@@ -36,7 +36,43 @@ public class InventoryService: MonoBehaviour
 
     public void AddItem()
     {
-        ItemData itemData = itemDataScriptableObject.GetRandomItemData();
+        ItemData randomItemData = itemDataScriptableObject.GetRandomItemData();
+        ItemControllerUI itemController = null;
+        foreach(ItemControllerUI itemControllerUI in inventoryItems)
+        {
+            ItemData itemData = itemControllerUI.GetData();
+//if we find an item that is at its maxstack then continue on to find the same item that has not reached its max stack
+            if (itemData.itemName == randomItemData.itemName)
+            {
+                if (itemData.quantity == itemData.maxStack)           
+                {
+                    continue;
+                }   
+                else
+                {
+                    itemController = itemControllerUI;
+                    break;
+                }
+                  
+            }
+        }
+
+
+        if (itemController != null)
+        {
+            ItemData itemData = itemController.GetData();
+            if (itemData.isStackable && itemData.quantity < itemData.maxStack)
+            {
+                itemData.quantity++;
+                itemController.SetData(itemData);
+                return;
+            }
+        }
+        CreateItemSlot(randomItemData);
+    }
+
+    public void CreateItemSlot(ItemData itemData)
+    {
         ItemControllerUI itemControllerUI = new ItemControllerUI(inventorySlotPrefab);
         itemControllerUI.SetData(itemData);
         itemControllerUI.SetParent(itemContainer);
@@ -44,7 +80,6 @@ public class InventoryService: MonoBehaviour
         inventoryItems.Add(itemControllerUI);
         IncreaseInventoryWeight(itemData.weight);
     }
-
 
     public void Init(EventService eventService,ItemInfoPanel itemInfoPanel,
         ItemManagePanel itemManagePanel,

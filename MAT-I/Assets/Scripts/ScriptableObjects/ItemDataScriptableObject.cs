@@ -37,6 +37,8 @@ public struct ItemData
     public ItemType itemType;
     public Rarity rarity;
     public int quantity;
+    public bool isStackable;
+    public int maxStack;
 }
 
 public enum ItemType
