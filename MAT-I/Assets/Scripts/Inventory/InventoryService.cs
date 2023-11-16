@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryService: MonoBehaviour
 {
-    
-    [Space(10)]
+
     [SerializeField] RectTransform itemContainer;
     [SerializeField] ItemViewUI inventorySlotPrefab;
     [SerializeField] ItemDataScriptableObject itemDataScriptableObject;
-
+    [SerializeField] Button gatherResourcesButton;
 
     #region SubPanels
     private ItemInfoPanel itemInfoPanel;
@@ -23,10 +23,6 @@ public class InventoryService: MonoBehaviour
 
     public void Start()
     {
-        AddItem();
-        AddItem();
-        AddItem();
-        AddItem();
         AddItem();
         AddItem();
     }
@@ -64,7 +60,11 @@ public class InventoryService: MonoBehaviour
         eventService.OnSellFromInfoPanel.AddListener(ShowItemManagePanel);
         eventService.OnSellFromManagePanel.AddListener(ShowConfirmationPanel);
         eventService.OnSellItem.AddListener(SellItem);
+        gatherResourcesButton.onClick.AddListener(GatherResources);
     }
+
+    public void GatherResources() => AddItem();
+ 
 
     public void SellItem(ItemData sellingItemdata)
     {
