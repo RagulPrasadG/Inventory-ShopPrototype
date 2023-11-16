@@ -209,6 +209,7 @@ public class InventoryService: MonoBehaviour
     public void IncreaseInventoryWeight(float weight)
     {
         this.inventoryWeight += weight;
+        this.inventoryWeight = float.Parse(this.inventoryWeight.ToString("0.00"));
         SetInventoryWeightText();
     }
 
