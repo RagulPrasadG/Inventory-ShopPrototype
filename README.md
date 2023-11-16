@@ -106,4 +106,4 @@ After selecting the quantity of the item, there should be a popup asking for con
   
 Check out the gameplay
 video here👇
-[![Video Thumbnail](https://img.youtube.com/vi/ZmvjilPcBJc/maxresdefault.jpg)]((https://www.youtube.com/watch?v=ZmvjilPcBJc)https://www.youtube.com/watch?v=ZmvjilPcBJc)
+https://youtu.be/ZmvjilPcBJc
