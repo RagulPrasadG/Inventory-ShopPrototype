@@ -104,6 +104,11 @@ After selecting the quantity of the item, there should be a popup asking for con
 * MVC(Model View Controller)
 * Dependency Injection
   
+<h2>Code Architecture</h2>
+
+![image](https://github.com/RagulPrasadG/MAT-I/assets/61055516/5da509b6-7c8f-4e0b-9a83-99002113a370)
+
 Check out the gameplay
 video here👇
+
 https://youtu.be/ZmvjilPcBJc
