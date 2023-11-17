@@ -137,8 +137,6 @@ public class ShopService : MonoBehaviour
 
     public void SetEvents()
     {
-        eventService.OnBuyFromInfoPanel.AddListener(ShowItemManagePanel);
-        eventService.OnBuyFromManagePanel.AddListener(ShowConfirmationPanel);
         eventService.OnBuyFromConfirmationPanel.AddListener(BuyItem);
         eventService.OnSellItem.AddListener(AddItem);
         materialsTab.onClick.AddListener(OnClickMaterialsTab);
@@ -193,19 +191,15 @@ public class ShopService : MonoBehaviour
         uIService.ShowMessage($"You bought {buyingitemdata.itemName}!!");
         selectedItem.SetData(selectedItemData);
         this.soundServiceSO.PlaySFX(SoundType.ItemBought, audioSource);
+        this.gameService.DecreaseCoins(buyingitemdata.buyingprice);
         this.eventService.OnBuyItem.RaiseEvent(buyingitemdata);
     }
 
     public void OnItemSelected(ItemControllerUI itemControllerUI)
     {
         selectedItem = itemControllerUI;
-        ShowInfoPanel(selectedItem.GetData());
-    }
-
-    public void ShowInfoPanel(ItemData itemData)
-    {
-        itemInfoPanel.SetItemInfo(itemData, false);
-        itemInfoPanel.gameObject.SetActive(true);
+        uIService.ShowItemInfoPanel();
+        eventService.OnShopItemSelected.RaiseEvent(selectedItem.GetData());
     }
 
     public void ToggleScrollViews(bool toggle)
@@ -216,17 +210,5 @@ public class ShopService : MonoBehaviour
         treasuresScrollView.gameObject.SetActive(toggle);
     }
 
-    public void ShowItemManagePanel(ItemData itemData)
-    {
-        itemManagePanel.SetItemInfoUI(itemData);
-        itemManagePanel.gameObject.SetActive(true);
-    }
-
-
-    public void ShowConfirmationPanel(ItemData itemData)
-    {
-        confirmationPanel.SetItemData(itemData,false);
-        confirmationPanel.SetBuyMessageText(itemData);
-        confirmationPanel.gameObject.SetActive(true);
-    }
+ 
 } 

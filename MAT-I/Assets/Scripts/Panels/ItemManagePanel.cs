@@ -28,7 +28,10 @@ public class ItemManagePanel : MonoBehaviour
 
     private bool isSelling;
     private EventService eventService;
+    private UIService uIService;
+
     private ItemData itemData;
+
     private void OnManageBuy(ItemData itemData)
     {
         isSelling = false;
@@ -57,16 +60,16 @@ public class ItemManagePanel : MonoBehaviour
     {
         this.itemData = itemData;
         this.itemCostText.text = $"{this.totalCost}";
-
         this.itemNameText.text = itemData.itemName;
         this.itemAmountText.text = $"X{this.totalQuantity}";
         this.itemWeightText.text = $"{this.totalWeight}kg";
         this.itemIcon.sprite = itemData.icon;
     }
 
-    public void Init(EventService eventService)
+    public void Init(EventService eventService,UIService uIservice)
     {
         this.eventService = eventService;
+        this.uIService = uIservice;
         this.eventService.OnSellFromInfoPanel.AddListener(OnManageSell);
         this.eventService.OnBuyFromInfoPanel.AddListener(OnManageBuy);
         this.increaseAmountbutton.onClick.AddListener(OnItemQuantityIncreased);
@@ -112,6 +115,7 @@ public class ItemManagePanel : MonoBehaviour
         this.itemData.sellingprice = this.totalCost;
         this.itemData.quantity = this.totalQuantity;
         this.itemData.weight = this.totalWeight;
+        uIService.ShowConfirmationPanel();
         eventService.OnSellFromManagePanel.RaiseEvent(this.itemData);
         this.gameObject.SetActive(false);
     }
@@ -121,6 +125,7 @@ public class ItemManagePanel : MonoBehaviour
         this.itemData.buyingprice = this.totalCost;
         this.itemData.quantity = this.totalQuantity;
         this.itemData.weight = this.totalWeight;
+        uIService.ShowConfirmationPanel();
         eventService.OnBuyFromManagePanel.RaiseEvent(this.itemData);
         this.gameObject.SetActive(false);
     }

@@ -17,29 +17,24 @@ public class InventoryService: MonoBehaviour
     [Header("Stats")]
     [SerializeField] int maxWeight;
     
-
     #region SubPanels
     private ItemInfoPanel itemInfoPanel;
     private ItemManagePanel itemManagePanel;
     private ConfirmationPanel confirmationPanel;
     #endregion 
-
     private List<ItemControllerUI> inventoryItems = new List<ItemControllerUI>();
     private ItemControllerUI selectedItem;
     private float inventoryWeight;
 
+    #region Services
     private GameService gameService;
     private EventService eventService;
     private UIService uIservice;
+    #endregion
+
     private SoundServiceScriptableObject soundServiceSO;
 
-    private void OnDisable()
-    {
-        eventService.OnSellFromInfoPanel.RemoveListener(ShowItemManagePanel);
-        eventService.OnBuyFromInfoPanel.RemoveListener(ShowItemManagePanel);
-    }
-
-    public void AddRandomItem()
+    public void GatherRandomItem()
     {
         ItemData randomItemData = itemDataScriptableObject.GetRandomItemData();
         AddItem(randomItemData);
@@ -102,31 +97,22 @@ public class InventoryService: MonoBehaviour
         IncreaseInventoryWeight(itemData.weight);
     }
 
-    public void Init(GameService gameService, SoundServiceScriptableObject soundServiceSO, UIService uIservice,EventService eventService,ItemInfoPanel itemInfoPanel,
-        ItemManagePanel itemManagePanel,
-        ConfirmationPanel confirmationPanel)
+    public void Init(GameService gameService, SoundServiceScriptableObject soundServiceSO,
+        UIService uIservice,EventService eventService)
     {
         this.soundServiceSO = soundServiceSO;
         this.gameService = gameService;
         this.eventService = eventService;
         this.uIservice = uIservice;
-        this.itemInfoPanel = itemInfoPanel;
-        this.itemManagePanel = itemManagePanel;
-        this.confirmationPanel = confirmationPanel;
         SetEvents();
     }
 
     public void SetEvents()
     {
-        eventService.OnSellFromInfoPanel.AddListener(ShowItemManagePanel);
-        eventService.OnSellFromManagePanel.AddListener(ShowConfirmationPanel);
         eventService.OnSellFromConfirmationPanel.AddListener(SellItem);
         eventService.OnBuyItem.AddListener(AddItem);
-        gatherResourcesButton.onClick.AddListener(GatherResources);
+        gatherResourcesButton.onClick.AddListener(GatherRandomItem);
     }
-
-    public void GatherResources() => AddRandomItem();
- 
 
     public void SellItem(ItemData sellingItemdata)
     {
@@ -144,30 +130,19 @@ public class InventoryService: MonoBehaviour
         }
         uIservice.ShowMessage($"You gained {sellingItemdata.sellingprice} coins!!");
         selectedItem.SetData(selecteditemData);
-
-        soundServiceSO.PlaySFX(SoundType.ItemSold, audioSource);
+        this.soundServiceSO.PlaySFX(SoundType.ItemSold, audioSource);
+        this.gameService.IncreaseCoins(sellingItemdata.sellingprice);
         this.eventService.OnSellItem.RaiseEvent(sellingItemdata);
-    }
-
-
-    public void ShowItemManagePanel(ItemData itemData)
-    {
-        itemManagePanel.SetItemInfoUI(itemData);
-        itemManagePanel.gameObject.SetActive(true);
     }
 
     public void OnItemSelected(ItemControllerUI itemControllerUI)
     {
         selectedItem = itemControllerUI;
-        ShowInfoPanel(selectedItem.GetData());
+        uIservice.ShowItemInfoPanel();
+        eventService.OnInventoryItemSelected.RaiseEvent(selectedItem.GetData());
     }
 
-    public void ShowInfoPanel(ItemData itemData)
-    {
-        itemInfoPanel.SetItemInfo(itemData, true);
-        itemInfoPanel.gameObject.SetActive(true);
-    }
-
+ 
     public void DecreaseInventoryWeight(float weight)
     {
         this.inventoryWeight -= weight;
@@ -186,12 +161,7 @@ public class InventoryService: MonoBehaviour
         this.inventoryWeightText.text = $"{inventoryWeight}kg";
     }
 
-    public void ShowConfirmationPanel(ItemData itemData)
-    {
-        confirmationPanel.SetItemData(itemData,true);
-        confirmationPanel.SetSellMessageText(itemData);
-        confirmationPanel.gameObject.SetActive(true);
-    }
+ 
 
 
 }

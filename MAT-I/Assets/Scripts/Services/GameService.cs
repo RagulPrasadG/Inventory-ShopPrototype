@@ -13,22 +13,9 @@ public class GameService : MonoBehaviour
 
     private EventService eventService;
 
-
-
-    private void OnDisable()
-    {
-        this.eventService.OnSellItem.RemoveListener(OnItemSold);
-    }
-
     private void Start()
     {
         SetDependencies();
-        SetEvents();
-    }
-
-    private void SetEvents()
-    {
-        this.eventService.OnSellItem.AddListener(OnItemSold);
     }
 
     public void IncreaseCoins(int amount)
@@ -37,9 +24,9 @@ public class GameService : MonoBehaviour
         uIService.SetCoinText();
     }
 
-    private void OnItemSold(ItemData soldItem)
+    public void DecreaseCoins(int amount)
     {
-        this.coins += soldItem.sellingprice;
+        this.coins -= amount;
         uIService.SetCoinText();
     }
 

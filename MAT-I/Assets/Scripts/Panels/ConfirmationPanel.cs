@@ -20,31 +20,41 @@ public class ConfirmationPanel : MonoBehaviour
         else
            eventService.OnBuyFromConfirmationPanel.RaiseEvent(this.itemData);
 
-
         this.gameObject.SetActive(false);
     }
 
     public void Init(EventService eventService)
     {
         this.eventService = eventService;
+        this.eventService.OnSellFromManagePanel.AddListener(ShowSellConfirmation);
+        this.eventService.OnBuyFromManagePanel.AddListener(ShowBuyConfirmation);
         yesButton.onClick.AddListener(OnYesButtonClicked);
         noButton.onClick.AddListener(OnNoButtonClicked);
     }
 
-    public void SetItemData(ItemData itemdata,bool isSelling)
+ 
+    public void ShowBuyConfirmation(ItemData itemData)
     {
-        this.itemData = itemdata;
-        this.isSelling = isSelling;
+        this.itemData = itemData;
+        this.isSelling = false;
+        SetBuyMessageText();
     }
 
-    public void SetBuyMessageText(ItemData itemdata)
+    public void ShowSellConfirmation(ItemData itemData)
     {
-        messageText.text = $"Do you want to buy X{itemdata.quantity} of {itemdata.itemName} for {itemdata.buyingprice}";
+        this.itemData = itemData;
+        this.isSelling = true;
+        SetSellMessageText();
     }
 
-    public void SetSellMessageText(ItemData itemdata)
+    public void SetBuyMessageText()
     {
-        messageText.text = $"Do you want to sell X{itemdata.quantity} of {itemdata.itemName} for {itemdata.sellingprice}";
+        messageText.text = $"Do you want to buy X{this.itemData.quantity} of {this.itemData.itemName} for {this.itemData.buyingprice}";
+    }
+
+    public void SetSellMessageText()
+    {
+        messageText.text = $"Do you want to sell X{this.itemData.quantity} of {this.itemData.itemName} for {this.itemData.sellingprice}";
     }
 
     private void OnNoButtonClicked() => this.gameObject.SetActive(false);

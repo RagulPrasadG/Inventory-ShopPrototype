@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class EventService
 {
-    #region InfoPanel
+    #region Shop&InventoryEvents
     public EventController<ItemData> OnSellFromInfoPanel;
     public EventController<ItemData> OnBuyFromInfoPanel;
-    #endregion 
 
-    #region ManagePanel
+
+
     public EventController<ItemData> OnSellFromManagePanel;
     public EventController<ItemData> OnBuyFromManagePanel;
-    #endregion
 
-    #region ConfirmationPanel
+
+
     public EventController<ItemData> OnSellFromConfirmationPanel;
     public EventController<ItemData> OnBuyFromConfirmationPanel;
-    #endregion
+
+
+    public EventController<ItemData> OnShopItemSelected;
+    public EventController<ItemData> OnInventoryItemSelected;
 
     public EventController<ItemData> OnSellItem;
     public EventController<ItemData> OnBuyItem;
+    #endregion
+
     public EventService()
     {
         OnSellFromInfoPanel = new EventController<ItemData>();
@@ -31,6 +36,8 @@ public class EventService
         OnSellItem = new EventController<ItemData>();
         OnBuyItem = new EventController<ItemData>();
         OnBuyFromConfirmationPanel = new EventController<ItemData>();
+        OnShopItemSelected = new EventController<ItemData>();
+        OnInventoryItemSelected = new EventController<ItemData>();
     }
 
 

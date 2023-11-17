@@ -31,11 +31,11 @@ public class UIService : MonoBehaviour
     {
         this.gameService = gameService;
         this.eventService = eventService;
-        this.itemInfoPanel.Init(eventService);
-        this.itemManagePanel.Init(eventService);
+        this.itemInfoPanel.Init(eventService,this);
+        this.itemManagePanel.Init(eventService,this);
         this.confirmationPanel.Init(eventService);
         shopService.Init(gameService, soundService, this,eventService,itemInfoPanel, itemManagePanel, confirmationPanel);
-        inventoryService.Init(gameService,soundService,this,eventService,itemInfoPanel,itemManagePanel,confirmationPanel);
+        inventoryService.Init(gameService,soundService,this,eventService);
         SetCoinText();
     }
 
@@ -48,12 +48,19 @@ public class UIService : MonoBehaviour
     {
         messageText.gameObject.SetActive(true);
         messageText.text = message;
-        var tween = messageText.DOFade(0, 1f);
+        var tween = messageText.DOFade(0, 2f);
         tween.onComplete += () => {
             messageText.DOFade(1, 0f);
             messageText.gameObject.SetActive(false);
         };
        
     }
+
+    public void ShowItemInfoPanel() => itemInfoPanel.gameObject.SetActive(true);
+
+    public void ShowItemManagePanel() => itemManagePanel.gameObject.SetActive(true);
+
+    public void ShowConfirmationPanel() => confirmationPanel.gameObject.SetActive(true);
+
 
 }
